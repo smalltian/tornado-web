@@ -21,6 +21,7 @@
 - Python2.7+Tornado5.1+Mongodb4.2+Redis+RESTful
 - motorengine1.0 数据操作模块
 - 非阻塞并发
+- pycryptodome、base64、md5加密解密
 
 # 数据库连接问题
 本地连接不需要配置用户密码，不然有权限问题，线上环境一定要配置权限用户，安全考虑
