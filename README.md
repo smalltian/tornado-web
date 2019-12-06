@@ -19,10 +19,15 @@
 
 ## 技术架构
 - Python2.7+Tornado5.1+Mongodb4.2+Redis+RESTful
-- motorengine1.0 数据操作模块
+- motorengine 数据操作模块
 - 非阻塞并发
 - pycryptodome、base64、md5加密解密
+- AES，CBS加密
+- tornadoredis连接池的使用
 
-# 数据库连接问题
+## 数据库连接问题
 本地连接不需要配置用户密码，不然有权限问题，线上环境一定要配置权限用户，安全考虑
 mongodb如何使用权限用户登录，查看文档
+
+## 问题
+1. redis获取值问题，可以存，数据库也有，但是获取不到

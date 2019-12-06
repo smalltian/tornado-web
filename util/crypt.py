@@ -16,8 +16,10 @@ class PKCS7Encoder:
     def encode(self, text):
         # 对需要加密的明文进行填充补位
         text_length = len(text)
+        print text_length
         # 计算需要填充的位数
         amount_to_pad = self.block_size - (text_length % self.block_size)
+        print amount_to_pad
         if amount_to_pad == 0:
             amount_to_pad = self.block_size
         # 获得补位所用的字符

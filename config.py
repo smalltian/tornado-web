@@ -23,7 +23,7 @@ QINIU_HOST = ''
 QINIU_STATIC_URL = QINIU_HOST + ''
 
 # 访问令牌
-AES_KEY = 'your 32 byte aes key'
+AES_KEY = 'JD98Dskw=23njQnd'
 TOKEN_TIMEOUT = 60 * 60 * 24 * 30
 
 

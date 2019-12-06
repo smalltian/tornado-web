@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from motorengine import Document, StringField, IntField, DateTimeField, \
     ReferenceField
+from bson import ObjectId
 
 class BaseDocument(Document):
     def to_dict(self):

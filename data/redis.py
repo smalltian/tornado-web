@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import redis
+import tornadoredis
 import config
 
-redis = redis.Redis(
-    connection_pool=redis.Connection(
-        host=config.REDIS_HOST,
-        port=config.REDIS_PORT,
-        db=0
-    )
-)
+CONNECTION_POOL = tornadoredis.ConnectionPool(max_connections=100, wait_for_available=True)
+redis = tornadoredis.Client(host=config.REDIS_HOST, port=config.REDIS_HOST, connection_pool=CONNECTION_POOL)

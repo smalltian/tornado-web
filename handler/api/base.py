@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from bson import ObjectId
-from util.json import dumps
+# from util.json import dumps
+from bson.json_util import dumps, loads
 import traceback
 from tornado.web import RequestHandler, HTTPError
+from tornado.escape import json_encode
 import os
 import config
 from handler.api import error_status
 from util.token import token_manager
 from qiniu import Auth, put_data
 from util.crypt import md5_data
+
 
 
 class BaseHandler(RequestHandler):
@@ -68,6 +71,11 @@ class BaseHandler(RequestHandler):
             'msg': msg,
             'data': data
         }))
+        # self.finish(json_encode({
+        #     'code': status_code,
+        #     'msg': msg,
+        #     'data': data
+        # }))
 
     def is_logined(self):
         if 'Token' in self.request.headers:
@@ -104,12 +112,12 @@ class BaseHandler(RequestHandler):
         raise HTTPError(**error_status.status_25)
 
     @classmethod
-    def validate_id(_id):
-        if _id is None or not ObjectId.is_valid(_id):
+    def validate_id(cls, _id):
+        if cls is None or not ObjectId.is_valid(_id):
             raise HTTPError(**error_status.status_3)
 
     @classmethod
-    def check_none(resource):
+    def check_none(cls, resource):
         if resource is None:
             raise HTTPError(**error_status.status_22)
 

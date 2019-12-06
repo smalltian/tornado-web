@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# import sys
 from tornado import ioloop
 import tornado.netutil
 import tornado.options
@@ -15,6 +15,7 @@ define("unix_socket", group='Webserver', default=None, help='Path to unix socket
 
 
 def run():
+    # sys.setrecursionlimit(20000)
     options.logging = None
     parse_command_line()
     options.subpath = options.subpath.strip('/')
@@ -28,6 +29,7 @@ def run():
     # 需要认证
     # connect(config.DB_NAME, host=config.DB_HOST, port=config.DB_PORT, io_loop=io_loop,
     #         username=config.DB_USER, password=config.DB_PWD)
+
 
     # create server
     from application import app

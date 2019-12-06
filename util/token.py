@@ -4,7 +4,7 @@ import time
 
 import config
 from data.redis import redis
-from util.crypt import AESCrypto
+from util.aes import AESCrypto
 
 
 class TokenManager:
@@ -16,6 +16,7 @@ class TokenManager:
     def create_token(self, uid):
         rt = int(time.time())
         token = self.crypto.encrypt('%d@%s' % (rt, uid))
+        # token = self.crypto.encrypt(uid)
         redis.set('token:' + uid, token)
         return token
 
@@ -31,9 +32,10 @@ class TokenManager:
             tk_rt = int(sp[0])
             tk_uid = sp[1]
 
-            active_token = redis.get('token:' + tk_uid)
-            if token != active_token:
-                return False, None
+            # print ('token:' + tk_uid)
+            # active_token = redis.get('token:' + tk_uid)
+            # if token != active_token:
+            #     return False, None
 
             if tk_rt < rt and (rt - tk_rt) <= self.timeout:
                 return True, tk_uid
@@ -45,7 +47,7 @@ class TokenManager:
             return False, None
 
     @classmethod
-    def clear_token(uid):
+    def clear_token(cls, uid):
         redis.delete('token:' + uid)
 
 
