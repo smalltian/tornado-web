@@ -8,7 +8,6 @@ from util.token import token_manager
 from handler.api import error_status
 from handler.api.base import BaseHandler
 from data.collections import User
-from data.redis import redis
 
 class LoginHandler(BaseHandler):
 

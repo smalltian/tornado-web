@@ -3,7 +3,7 @@
 import time
 
 import config
-from data.redis import redis
+from data.redis_init import redis
 from util.aes import AESCrypto
 
 
@@ -32,10 +32,10 @@ class TokenManager:
             tk_rt = int(sp[0])
             tk_uid = sp[1]
 
-            # print ('token:' + tk_uid)
-            # active_token = redis.get('token:' + tk_uid)
-            # if token != active_token:
-            #     return False, None
+            # 和redis苦进行对比校验，检查是否过期
+            active_token = redis.get('token:' + tk_uid)
+            if token != active_token:
+                return False, None
 
             if tk_rt < rt and (rt - tk_rt) <= self.timeout:
                 return True, tk_uid
